@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="/layouts/default.xhtml">
+	<ui:define name="view">
+		<ui:param name="title" value="#{msg['register.index.title']}" />
+		<ui:param name="root" value="#{request.contextPath}" />
+
+		<h:outputStylesheet library="styles" name="commons/social.css" />
+		<h:outputStylesheet library="styles" name="register.css" />
+		<h:outputStylesheet library="styles" name="signin.css" />
+
+		<link rel="stylesheet" type="text/css"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+
+		<b:row>
+			<b:column offset-md="4" col-sm="8">
+				<b:row styleClass="">
+					<b:column col-md="6" styleClass="nopadding">
+						<b:panel collapsible="false">
+							<b:row styleClass="loginHeader">
+
+								<h:graphicImage id="logo" class="loginLogo" library="img"
+									name="logo.png" />
+
+
+							</b:row>
+							<b:messages />
+							<form action="#{root}/login" method="post">
+
+								<b:inputText placeholder="#{msg['register.label.email']}"
+									value="#{registerFormModel.username}" field-id="username"
+									name="username" />
+								<b:inputSecret placeholder="#{msg['register.label.password']}"
+									value="#{registerFormModel.password}" field-id="password"
+									name="password" />
+
+								<input type="submit" class="btn btn-primary btn-block"
+									value="#{msg['register.label.login']}" />
+
+								<b:link value="¿Eres nuevo? Crear cuenta"
+									styleClass="btn btn-default btn-block" href="#{root}/register" />
+
+
+								<input type="hidden" name="#{_csrf.parameterName}"
+									value="#{_csrf.token}" />
+
+								<div style="display: none">
+
+									<button class="btn btn-facebook btn-block">
+										<i class="fab fa-facebook"></i> |
+										#{msg['register.social.facebook']}
+									</button>
+									<button class="btn btn-google-plus btn-block">
+										<i class="fab fa-"></i> | #{msg['register.social.google']}
+									</button>
+
+								</div>
+							</form>
+
+						</b:panel>
+
+
+
+					</b:column>
+					<b:row>
+
+					</b:row>
+				</b:row>
+
+			</b:column>
+		</b:row>
+	</ui:define>
+</ui:composition>
+</html>

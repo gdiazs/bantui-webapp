@@ -1,0 +1,50 @@
+.register {
+	background-color: white;
+}
+
+.nopadding {
+	padding: 0;
+}
+
+.panel {
+	border-radius: 0;
+	margin: 0;
+}
+
+.panel-body {
+	padding-left: 2em;
+	padding-right: 2em;
+	padding-bottom: 4em;
+	padding-top: 2em;
+}
+
+h2{
+	text-align: center;
+}
+
+.loginLogo{
+	max-height:64px;
+	height: 64px;
+}
+
+.leftform{
+	margin-top: 1em;
+}
+
+.registerHeader{
+	text-align: center;
+}
+
+.title {
+	font-size: 18px;
+	text-align: center;
+	color: gray;
+}
+
+.terms{
+	margin-bottom: 2em;
+}
+
+.registerBtn{
+	margin-top: 1em;
+}

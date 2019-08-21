@@ -1,0 +1,130 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.gdiazs.bantui</groupId>
+	<artifactId>bantui-webapp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>Bantui WebApp</name>
+
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<deltaspike.version>1.8.2</deltaspike.version>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.deltaspike.distribution</groupId>
+				<artifactId>distributions-bom</artifactId>
+				<version>${deltaspike.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.bootsfaces</groupId>
+			<artifactId>bootsfaces</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.deltaspike.core</groupId>
+			<artifactId>deltaspike-core-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.deltaspike.core</groupId>
+			<artifactId>deltaspike-core-impl</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.deltaspike.modules</groupId>
+			<artifactId>deltaspike-jsf-module-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.deltaspike.modules</groupId>
+			<artifactId>deltaspike-jsf-module-impl</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.deltaspike.modules</groupId>
+			<artifactId>deltaspike-data-module-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.deltaspike.modules</groupId>
+			<artifactId>deltaspike-data-module-impl</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.2.13.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.2.13.RELEASE</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.6</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		
+
+	</dependencies>
+
+	<build>
+		<finalName>bantui</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomee.maven</groupId>
+				<artifactId>tomee-maven-plugin</artifactId>
+				<version>7.1.1</version>
+				<configuration>
+					<tomeeVersion>7.1.1</tomeeVersion>
+					<tomeeClassifier>plus</tomeeClassifier>
+					<config>${project.basedir}/src/main/tomee/conf</config>
+					<webapps>
+						<webapp>${project.groupId}:${project.artifactId}:${project.version}?name=ROOT</webapp>
+					</webapps>
+					<libs>
+						<lib>org.postgresql:postgresql:42.2.6</lib>
+					</libs>
+				</configuration>
+
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+
+</project>

@@ -1,0 +1,40 @@
+
+
+.searchBarInput {
+	display: none;
+
+}
+
+.searchBarInput:hover, .searchBarInput:focus {
+	outline: none;
+	box-shadow:none !important;
+	border:1px solid #ccc !important;
+
+}
+
+.searchBarInput2 {
+	display: block;
+}
+.searchContent{
+	padding-top: 1em;
+}
+
+@media ( min-width : 768px) {
+	.searchBarInput {
+		height: 2.5em;
+		border-radius: 3px;
+		display: block;
+		font-size: 1.2em;
+		text-decoration: none;
+		font-weight: 500;
+
+	}
+	.searchBarInput2 {
+		height: 2.5em;
+		border-radius: 3px;
+		display: none;
+		font-size: 1.2em;
+		text-decoration: none;
+		font-weight: 500;
+	}
+}

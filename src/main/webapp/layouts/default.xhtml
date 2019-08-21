@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<title><h:outputText value="#{title}" /></title>
+	<h:outputStylesheet library="themes" name="default/bootstrap.min.css" />
+	<h:outputStylesheet library="themes" name="default/theme.css" />
+</h:head>
+<h:body>
+	<b:container fluid="false">
+		<ui:insert name="view" />
+	</b:container>
+</h:body>
+</html>

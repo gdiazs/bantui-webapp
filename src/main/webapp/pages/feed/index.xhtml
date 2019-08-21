@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/layouts/feed.xhtml">
+	<h:outputStylesheet library="styles" name="feed/index.css" />
+
+	<ui:define name="view">
+
+		<ui:include src="/pages/feed/_searchBar.xhtml" />
+		<b:container>
+			<b:row>
+				<b:column col-md="8" offset-md="2">
+					<b:form id="secondSearch">
+						<b:inputText styleClass="searchBarInput2" look=""
+							placeholder="Buscar productos" />
+						<input type="hidden" name="#{_csrf.parameterName}"
+							value="#{_csrf.token}" />
+					</b:form>
+				</b:column>
+			</b:row>		
+				
+				#{request.getUserPrincipal().getPrincipal().isUserInRole('ROLE_CUSTOMER')}	
+			</b:container>
+	</ui:define>
+</ui:composition>
+</html>

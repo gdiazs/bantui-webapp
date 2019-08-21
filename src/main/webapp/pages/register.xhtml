@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="/layouts/default.xhtml">
+	<ui:define name="view">
+		<ui:param name="title" value="#{msg['register.index.title']}" />
+
+		<h:outputStylesheet library="styles" name="commons/social.css" />
+		<h:outputStylesheet library="styles" name="register.css" />
+		<b:row>
+			<b:column offset-md="4" col-sm="4">
+				<b:panel collapsible="false">
+
+					<b:form id="signupForm">
+						<b:row styleClass="registerHeader">
+
+							<h:graphicImage id="logo" class="loginLogo" library="images"
+								name="logo.png" />
+
+						</b:row>
+						<p class="title"></p>
+						<b:messages />
+						<b:inputText placeholder="#{msg['register.label.username']}"
+							value="#{registerFormModel.username}" />
+						<b:inputText placeholder="#{msg['register.label.email']}"
+							value="#{registerFormModel.email}" />
+						<b:inputSecret placeholder="#{msg['register.label.password']}"
+							value="#{registerFormModel.password}" />
+						<b:inputSecret placeholder="#{msg['register.label.repassword']}"
+							value="#{registerFormModel.rePassword}" />
+
+						<h:outputText styleClass="terms"
+							value="#{msg['register.label.termsAndConditions']}"
+							escape="false" />
+
+						<b:commandButton value="#{msg['register.label.register']}"
+							actionListener="#{registerIndexController.registerClick}"
+							look="primary" styleClass="registerBtn btn-block" />
+						<b:commandButton value="¿Tienes una cuenta? Entrar"
+							action="#{signinController.goToLogin}" look="default"
+							styleClass="btn-block" />
+
+						<input type="hidden" name="#{_csrf.parameterName}"
+							value="#{_csrf.token}" />
+					</b:form>
+				</b:panel>
+			</b:column>
+		</b:row>
+	</ui:define>
+</ui:composition>
+</html>
