@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="/layouts/dashboard.xhtml">
+	<ui:define name="view">
+		<h:form>
+			<b:inputText placeholder="Type something here..."
+				value="#{dashboardController.input}"
+				onkeyup="ajax:dashboardController.click()" update="output"
+				delay="1000" />
+
+			<h:outputText id="output" value="#{dashboardController.input}"></h:outputText>
+			<input type="hidden" name="#{_csrf.parameterName}"
+				value="#{_csrf.token}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

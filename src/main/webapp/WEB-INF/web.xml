@@ -29,6 +29,11 @@
 	</context-param>
 
 	<context-param>
+		<param-name>org.omnifaces.FACES_VIEWS_SCAN_PATHS</param-name>
+		<param-value>/*.xhtml</param-value>
+	</context-param>
+
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			/WEB-INF/spring-security.xml
@@ -65,7 +70,22 @@
 	<welcome-file-list>
 		<welcome-file>feed/index.xhtml</welcome-file>
 	</welcome-file-list>
-
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/pages/errors/404.xhtml</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>401</error-code>
+		<location>/pages/errors/401.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/pages/errors/500.xhtml</location>
+	</error-page>	
+	
+	
 
 
 </web-app>

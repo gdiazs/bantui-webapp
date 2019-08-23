@@ -1,4 +1,4 @@
-package com.gdiazs.bantui.web.security.interceptors;
+package com.gdiazs.bantui.web.security;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -9,8 +9,6 @@ import javax.interceptor.InvocationContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import com.gdiazs.bantui.web.security.annotations.Secured;
-import com.gdiazs.bantui.web.security.exceptions.AccessDeniedException;
 
 @Secured
 @Interceptor

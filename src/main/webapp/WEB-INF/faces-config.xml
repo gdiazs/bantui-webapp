@@ -11,18 +11,13 @@ http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 		</locale-config>
 		<resource-bundle>
 			<base-name>i18n.messages</base-name>
-			<var>msg</var>
+			<var>i18n</var>
 		</resource-bundle>
-		<resource-library-contracts>
-			<contract-mapping>
-		        <url-pattern>/dashboard/*</url-pattern>
-		        <contracts>dashboard</contracts>
-			</contract-mapping>
-			<contract-mapping>
-		        <url-pattern>/default/*</url-pattern>
-		        <contracts>default</contracts>
-			</contract-mapping>
-		</resource-library-contracts>
+
 	</application>
+
+	<factory>
+		<exception-handler-factory>org.omnifaces.exceptionhandler.FacesMessageExceptionHandlerFactory</exception-handler-factory>
+	</factory>
 
 </faces-config>

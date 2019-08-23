@@ -6,24 +6,32 @@
 
 
 	<http auto-config="true">
-		<intercept-url pattern="/faces/javax.faces.resource/**"
-			access="isAnonymous()" />
-		<intercept-url pattern="/dashboard/**"
+	
+		<intercept-url pattern="/javax.faces.resource/**"
+			access="permitAll" />
+			
+		<intercept-url pattern="/pages/dashboard.xhtml"
 			access="isAuthenticated()" />
-		<intercept-url pattern="/signin/**"
+			
+		<intercept-url pattern="/pages/signin.xhtml"
 			access="isAnonymous()" />
-		<intercept-url pattern="/login/**"
+		<intercept-url pattern="/pages/register.xhtml"
 			access="isAnonymous()" />
+			
+		<form-login login-page="/pages/signin.xhtml"
+			login-processing-url="/login"
+			default-target-url="/pages/dashboard.xhtml"
+			authentication-failure-url="/pages/signin.xhtml?error=true" />
+			
+			
+		<intercept-url pattern="/pages/**" access="isAuthenticated()" />
 
-		<form-login login-page="/signin/index.xhtml"
-			login-processing-url="/login" default-target-url="/dashboard"
-			authentication-failure-url="/signin/index.xhtml?error=true" />
 
 	</http>
 	<authentication-manager>
 		<authentication-provider
 			user-service-ref="userDetailService">
-			<password-encoder ref="passwordEncoder"/>
+			<password-encoder ref="passwordEncoder" />
 		</authentication-provider>
 	</authentication-manager>
 

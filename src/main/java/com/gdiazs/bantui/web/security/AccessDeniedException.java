@@ -1,4 +1,4 @@
-package com.gdiazs.bantui.web.security.exceptions;
+package com.gdiazs.bantui.web.security;
 
 public class AccessDeniedException extends RuntimeException {
 

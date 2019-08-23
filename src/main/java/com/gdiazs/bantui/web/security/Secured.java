@@ -1,4 +1,4 @@
-package com.gdiazs.bantui.web.security.annotations;
+package com.gdiazs.bantui.web.security;
 
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;

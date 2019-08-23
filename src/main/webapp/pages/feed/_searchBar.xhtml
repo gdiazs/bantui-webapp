@@ -7,9 +7,10 @@
 
 <ui:composition>
 	<h:outputStylesheet library="styles" name="feed/_searchBar.css" />
-	<b:navBar styleClass="searchBar" prependId="false">
+	<b:navBar styleClass="searchBar" prependId="false" fluid="true">
 		<b:row prependId="false">
-			<b:column styleClass="searchContent" col-md="8" offset-md="2" prependId="false">
+			<b:column styleClass="searchContent" col-md="6" offset-md="3"
+				prependId="false">
 				<b:form id="mainSearch" prependId="false">
 					<b:inputText styleClass="searchBarInput" list="here"
 						placeholder="Buscar productos">
@@ -21,7 +22,15 @@
 						value="#{_csrf.token}" />
 				</b:form>
 			</b:column>
+			<b:navbarLinks pull="right" styleClass="searchBarLinks">
+				<b:navLink value="Iniciar Sesión" href="#"></b:navLink>
+				<b:navLink value="Registrarse" href="#"></b:navLink>
+
+			</b:navbarLinks>
 		</b:row>
+
+
+
 	</b:navBar>
 
 </ui:composition>

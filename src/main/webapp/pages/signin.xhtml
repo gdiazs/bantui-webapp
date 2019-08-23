@@ -7,9 +7,8 @@
 
 <ui:composition template="/layouts/default.xhtml">
 	<ui:define name="view">
-		<ui:param name="title" value="#{msg['register.index.title']}" />
 		<ui:param name="root" value="#{request.contextPath}" />
-
+		<ui:param name="title" value="#{i18n['register.index.title']}" />
 		<h:outputStylesheet library="styles" name="commons/social.css" />
 		<h:outputStylesheet library="styles" name="register.css" />
 		<h:outputStylesheet library="styles" name="signin.css" />
@@ -21,10 +20,10 @@
 			<b:column offset-md="4" col-sm="8">
 				<b:row styleClass="">
 					<b:column col-md="6" styleClass="nopadding">
-						<b:panel collapsible="false">
+						<b:panel collapsible="false" styleClass="signinPanel">
 							<b:row styleClass="loginHeader">
 
-								<h:graphicImage id="logo" class="loginLogo" library="img"
+								<h:graphicImage id="logo" class="loginLogo" library="images"
 									name="logo.png" />
 
 
@@ -32,18 +31,18 @@
 							<b:messages />
 							<form action="#{root}/login" method="post">
 
-								<b:inputText placeholder="#{msg['register.label.email']}"
+								<b:inputText placeholder="#{i18n['register.label.email']}"
 									value="#{registerFormModel.username}" field-id="username"
 									name="username" />
-								<b:inputSecret placeholder="#{msg['register.label.password']}"
+								<b:inputSecret placeholder="#{i18n['register.label.password']}"
 									value="#{registerFormModel.password}" field-id="password"
 									name="password" />
 
 								<input type="submit" class="btn btn-primary btn-block"
-									value="#{msg['register.label.login']}" />
+									value="#{i18n['register.label.login']}" />
 
 								<b:link value="¿Eres nuevo? Crear cuenta"
-									styleClass="btn btn-default btn-block" href="#{root}/register" />
+									styleClass="btn btn-default btn-block" href="#{root}/pages/register.xhtml"/>
 
 
 								<input type="hidden" name="#{_csrf.parameterName}"
@@ -53,10 +52,10 @@
 
 									<button class="btn btn-facebook btn-block">
 										<i class="fab fa-facebook"></i> |
-										#{msg['register.social.facebook']}
+										#{i18n['register.social.facebook']}
 									</button>
 									<button class="btn btn-google-plus btn-block">
-										<i class="fab fa-"></i> | #{msg['register.social.google']}
+										<i class="fab fa-"></i> | #{i18n['register.social.google']}
 									</button>
 
 								</div>

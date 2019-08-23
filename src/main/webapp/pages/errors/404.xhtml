@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<title><h:outputText value="#{title}" /></title>
+	<h:outputStylesheet library="themes" name="default/bootstrap.min.css" />
+	<h:outputStylesheet library="themes" name="default/theme.css" />
+	<style type="text/css">
+		
+		.error-template {
+			padding: 40px 15px;
+			text-align: center;
+		}
+		
+		.error-actions {
+			margin-top: 15px;
+			margin-bottom: 15px;
+		}
+		
+		.error-actions .btn {
+			margin-right: 10px;
+		}
+	</style>
+</h:head>
+<h:body>
+	<b:container fluid="false">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="error-template">
+						<h1>#{i18n['pages.error.opps']}</h1>
+						<h2>#{i18n['pages.error.404']}</h2>
+						<div class="error-details">#{i18n['pages.error.404.message']}</div>
+						<div class="error-actions">
+							<a href="javascript:history.back()"
+								class="btn btn-primary btn-lg"><span
+								class="glyphicon glyphicon-triangle-left"></span> #{i18n['pages.error.goback']} </a><a
+								href="mailto:support@bantui.com"
+								class="btn btn-default btn-lg"><span
+								class="glyphicon glyphicon-envelope"></span> #{i18n['pages.error.support']} </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</b:container>
+</h:body>
+</html>

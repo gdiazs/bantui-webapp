@@ -7,13 +7,15 @@
 
 <ui:composition template="/layouts/default.xhtml">
 	<ui:define name="view">
-		<ui:param name="title" value="#{msg['register.index.title']}" />
-
+		<ui:param name="title" value="#{i18n['register.index.title']}" />
+		<ui:param name="root" value="#{request.contextPath}" />
 		<h:outputStylesheet library="styles" name="commons/social.css" />
 		<h:outputStylesheet library="styles" name="register.css" />
+		<script src="https://www.google.com/recaptcha/api.js"></script>
+
 		<b:row>
 			<b:column offset-md="4" col-sm="4">
-				<b:panel collapsible="false">
+				<b:panel collapsible="false" styleClass="registerPanel">
 
 					<b:form id="signupForm">
 						<b:row styleClass="registerHeader">
@@ -24,28 +26,45 @@
 						</b:row>
 						<p class="title"></p>
 						<b:messages />
-						<b:inputText placeholder="#{msg['register.label.username']}"
-							value="#{registerFormModel.username}" />
-						<b:inputText placeholder="#{msg['register.label.email']}"
-							value="#{registerFormModel.email}" />
-						<b:inputSecret placeholder="#{msg['register.label.password']}"
-							value="#{registerFormModel.password}" />
-						<b:inputSecret placeholder="#{msg['register.label.repassword']}"
-							value="#{registerFormModel.rePassword}" />
+						
+						<b:inputText placeholder="#{i18n['register.label.username']}"
+							value="#{registerFormModel.username}" required="true"
+							required-message="#{i18n['register.validation.username']}" />
+							
+						<b:inputText placeholder="#{i18n['register.label.email']}"
+							value="#{registerFormModel.email}" required="true"
+							required-message="#{i18n['register.validation.email']}" />
+							
+						<b:inputSecret placeholder="#{i18n['register.label.password']}"
+							value="#{registerFormModel.password}" required="true"
+							required-message="#{i18n['register.validation.password']}" />
+							
+						<b:inputSecret placeholder="#{i18n['register.label.repassword']}"
+							value="#{registerFormModel.rePassword}" required="true"
+							required-message="#{i18n['register.validation.repassword']}" />
 
 						<h:outputText styleClass="terms"
-							value="#{msg['register.label.termsAndConditions']}"
+							value="#{i18n['register.label.termsAndConditions']}"
 							escape="false" />
 
-						<b:commandButton value="#{msg['register.label.register']}"
-							actionListener="#{registerIndexController.registerClick}"
+						<div class="g-recaptcha"
+							data-sitekey="6Le1bGkUAAAAAGoHlXkHhRw6wTOEDk-C4Qpw1PVl"></div>
+
+
+
+						<b:commandButton value="#{i18n['register.label.register']}"
+							actionListener="#{registerController.registerClick}"
 							look="primary" styleClass="registerBtn btn-block" />
-						<b:commandButton value="¿Tienes una cuenta? Entrar"
-							action="#{signinController.goToLogin}" look="default"
+
+
+
+						<b:link value="¿Tienes una cuenta? Entrar"
+							href="#{root}/pages/signin.xhtml" look="default"
 							styleClass="btn-block" />
 
 						<input type="hidden" name="#{_csrf.parameterName}"
 							value="#{_csrf.token}" />
+							
 					</b:form>
 				</b:panel>
 			</b:column>
