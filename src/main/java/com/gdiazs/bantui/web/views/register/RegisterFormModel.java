@@ -1,6 +1,6 @@
 package com.gdiazs.bantui.web.views.register;
 
-import javax.enterprise.inject.Model;
+import jakarta.enterprise.inject.Model;
 
 @Model
 public class RegisterFormModel {

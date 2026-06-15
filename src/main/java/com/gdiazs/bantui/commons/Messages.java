@@ -1,24 +1,32 @@
 package com.gdiazs.bantui.commons;
 
-import org.apache.deltaspike.core.api.message.MessageBundle;
-import org.apache.deltaspike.core.api.message.MessageContextConfig;
-import org.apache.deltaspike.core.api.message.MessageTemplate;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.context.FacesContext;
 
-@MessageBundle
-@MessageContextConfig(messageSource = {"i18n.messages"})
-public interface Messages {
-  @MessageTemplate("{security.access.denied}")
-  String getSecurityAccessDenied();
+@ApplicationScoped
+public class Messages {
 
-  @MessageTemplate("{register.error.userFound}")
-  String getUserFound();
+  public String getSecurityAccessDenied() {
+    return get("security.access.denied");
+  }
 
-  @MessageTemplate("{register.error.emailFound}")
-  String getEmailFound();
-  
-  
-  @MessageTemplate("{register.info.accountCreated}")
-  String getAccountCreated();
+  public String getUserFound() {
+    return get("register.error.userFound");
+  }
 
+  public String getEmailFound() {
+    return get("register.error.emailFound");
+  }
 
+  public String getAccountCreated() {
+    return get("register.info.accountCreated");
+  }
+
+  private String get(String key) {
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+    Locale locale = facesContext == null ? Locale.getDefault() : facesContext.getViewRoot().getLocale();
+    return ResourceBundle.getBundle("i18n.messages", locale).getString(key);
+  }
 }

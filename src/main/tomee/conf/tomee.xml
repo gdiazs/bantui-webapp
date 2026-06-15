@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tomee>
-	<Resource id="HSQLDB Database" type="DataSource">
+		<Resource id="bantuiDS" type="DataSource">
 		JdbcDriver org.hsqldb.jdbcDriver
 		JdbcUrl jdbc:hsqldb:file:~/.javaee8db
 		UserName sa
 		Password
 	</Resource>
 
-	<Resource id="java:comp/env/jndi/email" type="javax.mail.Session">
+		<Resource id="jndi/defaultMail" type="jakarta.mail.Session">
 		mail.smtp.host=smtp.gmail.com
 		mail.smtp.starttls.enable=true
 		mail.smtp.port=587

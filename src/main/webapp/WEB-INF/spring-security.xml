@@ -7,7 +7,7 @@
 
 	<http auto-config="true">
 	
-		<intercept-url pattern="/javax.faces.resource/**"
+			<intercept-url pattern="/jakarta.faces.resource/**"
 			access="permitAll" />
 			
 		<intercept-url pattern="/pages/dashboard.xhtml"
@@ -48,4 +48,3 @@
 		<b:constructor-arg value="11" />
 	</b:bean>
 </b:beans>
-

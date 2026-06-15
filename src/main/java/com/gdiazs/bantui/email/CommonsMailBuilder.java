@@ -1,8 +1,8 @@
 package com.gdiazs.bantui.email;
 
-import javax.mail.Session;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
+import jakarta.mail.Session;
+import org.apache.commons.mail2.core.EmailException;
+import org.apache.commons.mail2.jakarta.HtmlEmail;
 
 
 public class CommonsMailBuilder {

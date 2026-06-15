@@ -1,7 +1,7 @@
 package com.gdiazs.bantui.web.views.dashboard;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 import com.gdiazs.bantui.web.security.Secured;
 
 @Named

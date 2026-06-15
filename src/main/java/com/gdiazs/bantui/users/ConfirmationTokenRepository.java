@@ -1,10 +1,17 @@
 package com.gdiazs.bantui.users;
 
-import org.apache.deltaspike.data.api.EntityRepository;
-import org.apache.deltaspike.data.api.Repository;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
-@Repository
-public interface ConfirmationTokenRepository
-    extends EntityRepository<ConfirmationToken, ConfirmationTokenPK> {
+@ApplicationScoped
+public class ConfirmationTokenRepository {
 
+  @Inject
+  private EntityManager entityManager;
+
+  public ConfirmationToken save(ConfirmationToken confirmationToken) {
+    entityManager.persist(confirmationToken);
+    return confirmationToken;
+  }
 }

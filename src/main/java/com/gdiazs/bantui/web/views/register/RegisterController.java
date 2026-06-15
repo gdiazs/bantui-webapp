@@ -1,10 +1,10 @@
 package com.gdiazs.bantui.web.views.register;
 
 import java.util.Locale;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import org.omnifaces.cdi.Param;
 import com.gdiazs.bantui.commons.Messages;
 import com.gdiazs.bantui.notification.NotificationService;

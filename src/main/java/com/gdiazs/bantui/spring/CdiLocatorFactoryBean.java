@@ -1,6 +1,6 @@
 package com.gdiazs.bantui.spring;
 
-import org.apache.deltaspike.core.api.provider.BeanProvider;
+import jakarta.enterprise.inject.spi.CDI;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -48,7 +48,7 @@ public class CdiLocatorFactoryBean implements InitializingBean, FactoryBean<Obje
 
   @Override
   public void afterPropertiesSet() throws Exception {
-    this.cdiBean = BeanProvider.getContextualReference(this.businessImplementation, false);
+    this.cdiBean = CDI.current().select(this.businessImplementation).get();
   }
 
 

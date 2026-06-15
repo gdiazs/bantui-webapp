@@ -1,13 +1,14 @@
 package com.gdiazs.bantui.startup;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import javax.servlet.ServletContext;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
+import jakarta.servlet.ServletContext;
 import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import org.thymeleaf.templateresolver.WebApplicationTemplateResolver;
+import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 @Dependent
 public class EmailConfigProducer {
@@ -19,8 +20,8 @@ public class EmailConfigProducer {
   @Singleton
   public ITemplateEngine templateEngine() {
     TemplateEngine templateEngine = new TemplateEngine();
-    ServletContextTemplateResolver templateResolver = 
-        new ServletContextTemplateResolver(this.context);
+    WebApplicationTemplateResolver templateResolver = new WebApplicationTemplateResolver(
+        JakartaServletWebApplication.buildApplication(this.context));
     
     templateResolver.setCacheable(false);
 

@@ -3,9 +3,9 @@ package com.gdiazs.bantui.notification;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import com.gdiazs.bantui.email.EmailSender;
 import com.gdiazs.bantui.email.EmailTemplate;
 import com.gdiazs.bantui.register.RegisterService;
@@ -32,8 +32,8 @@ public class NotificationService {
 
     final Map<String, Object> variables = new HashMap<>();
     variables.put("username", username);
-    variables.put("url", "http://localhost:8080/bantui/pages/activateAccount.xhtml?token=" + createConfirmationToken.getToken());
-    variables.put("imageurl","http://localhost:8080/bantui/javax.faces.resource/logo.png.xhtml?ln=images");
+    variables.put("url", "http://localhost:8080/pages/activateAccount.xhtml?token=" + createConfirmationToken.getToken());
+    variables.put("imageurl", "http://localhost:8080/jakarta.faces.resource/logo.png.xhtml?ln=images");
     
     emailSender.loadTemplate(EmailTemplate.CONFIRMATION_TEMPLATE.getValue());
     emailSender.addVariables(variables);
