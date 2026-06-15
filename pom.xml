@@ -17,7 +17,7 @@
 		<bcrypt.version>0.10.2</bcrypt.version>
 		<junit.version>5.13.4</junit.version>
 		<database.driver>org.hsqldb.jdbc.JDBCDriver</database.driver>
-		<database.url>jdbc:hsqldb:file:${user.home}/.bantui/bantui;shutdown=true</database.url>
+		<database.url>jdbc:hsqldb:file:${user.home}/.bantui/bantui</database.url>
 		<database.username>sa</database.username>
 		<database.password></database.password>
 		<hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
@@ -152,6 +152,26 @@
 	</build>
 
 	<profiles>
+		<profile>
+			<id>executable</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomee.maven</groupId>
+						<artifactId>tomee-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>build-executable-jar</id>
+								<phase>package</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<profile>
 			<id>postgresql</id>
 			<properties>

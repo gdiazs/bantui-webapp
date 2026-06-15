@@ -14,6 +14,24 @@ schema without creating or modifying tables:
 mvn -Ppostgresql tomee:run
 ```
 
+## Executable JAR
+
+The `executable` profile packages the WAR and TomEE Plus into a self-contained runnable
+JAR:
+
+```bash
+mvn clean package -Pexecutable
+cd target
+java -jar bantui-exec.jar
+```
+
+The first run extracts TomEE under `target/.distribution`; subsequent runs reuse that
+directory. Build the PostgreSQL variant by combining both profiles:
+
+```bash
+mvn clean package -Pexecutable,postgresql
+```
+
 Data access intentionally uses Jakarta Persistence 3.1 repositories. Jakarta Data 1.0
 belongs to Jakarta EE 11, so adopting it is deferred until the application moves beyond
 TomEE 10 and Jakarta EE 10.

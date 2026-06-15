@@ -2,6 +2,25 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "TomEE: build executable JAR",
+            "type": "shell",
+            "command": "mvn",
+            "args": [
+                "clean",
+                "package",
+                "-Pexecutable"
+            ],
+            "group": "build",
+            "problemMatcher": [
+                "$javac"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
             "label": "TomEE: debug",
             "type": "shell",
             "command": "mvn",
