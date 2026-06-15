@@ -29,6 +29,16 @@ public class UserRepository {
         .findFirst();
   }
 
+  public Optional<User> findByUsernameOrEmail(String login) {
+    return entityManager.createQuery(
+        "select user from User user "
+            + "where user.username = :login or user.email = :login", User.class)
+        .setParameter("login", login)
+        .setMaxResults(1)
+        .getResultStream()
+        .findFirst();
+  }
+
   public User save(User user) {
     entityManager.persist(user);
     return user;

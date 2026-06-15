@@ -18,11 +18,16 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class BantuiIdentityStore implements IdentityStore {
 
-  private final UserRepository userRepository;
-  private final PasswordHasher passwordHasher;
+  @Inject
+  private UserRepository userRepository;
 
   @Inject
-  public BantuiIdentityStore(UserRepository userRepository, PasswordHasher passwordHasher) {
+  private PasswordHasher passwordHasher;
+
+  public BantuiIdentityStore() {
+  }
+
+  BantuiIdentityStore(UserRepository userRepository, PasswordHasher passwordHasher) {
     this.userRepository = userRepository;
     this.passwordHasher = passwordHasher;
   }
@@ -33,7 +38,7 @@ public class BantuiIdentityStore implements IdentityStore {
       return INVALID_RESULT;
     }
 
-    User user = userRepository.findByUsername(usernamePassword.getCaller()).orElse(null);
+    User user = userRepository.findByUsernameOrEmail(usernamePassword.getCaller()).orElse(null);
     if (user == null || !isActive(user)
         || !passwordHasher.verify(usernamePassword.getPassword().getValue(), user.getPassword())) {
       return INVALID_RESULT;
@@ -48,8 +53,7 @@ public class BantuiIdentityStore implements IdentityStore {
   }
 
   private boolean isActive(User user) {
-    return user.isEnabled()
-        && user.isAccountNonExpired()
+    return user.isAccountNonExpired()
         && user.isAccountNonLocked()
         && user.isCredentialsNonExpired();
   }

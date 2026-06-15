@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import java.util.UUID;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,11 +36,12 @@ class UserRepositoryTest {
 
   @Test
   void savesAndFindsUsersWithExplicitQueries() {
-    User user = new User();
-    user.setId(UUID.randomUUID().toString());
-    user.setUsername("repository-user");
-    user.setEmail("repository@example.com");
-    user.setPassword("encoded");
+    User user = new User.UserBuilder()
+        .addUsername("repository-user")
+        .addEmail("repository@example.com")
+        .addPassword("encoded")
+        .addRoles("ROLE_CONSUMER")
+        .build();
 
     entityManager.getTransaction().begin();
     repository.save(user);
@@ -51,6 +51,12 @@ class UserRepositoryTest {
     assertEquals(user.getId(), repository.findByUsername("repository-user").orElseThrow().getId());
     assertEquals(user.getId(),
         repository.findByEmail("repository@example.com").orElseThrow().getId());
+    assertTrue(repository.findByUsername("repository-user").orElseThrow()
+        .isUserInRole("ROLE_CONSUMER"));
+    assertEquals(user.getId(),
+        repository.findByUsernameOrEmail("repository@example.com").orElseThrow().getId());
+    assertEquals(User.YES,
+        repository.findByUsername("repository-user").orElseThrow().getEnabled());
     assertTrue(repository.findByUsername("missing-user").isEmpty());
   }
 }

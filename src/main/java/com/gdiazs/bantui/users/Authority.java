@@ -89,7 +89,6 @@ public class Authority {
       Authority auth = new Authority();
       auth.setId(UUID.randomUUID().toString());
       auth.setAuthority(roles[i]);
-      auth.setVersion(1);
       auths.add(auth);
     }
 

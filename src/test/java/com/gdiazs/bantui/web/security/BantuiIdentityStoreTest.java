@@ -30,14 +30,32 @@ class BantuiIdentityStoreTest {
   }
 
   @Test
-  void rejectsInvalidPasswordsAndDisabledUsers() {
+  void validatesARecentlyRegisteredUserByEmail() {
+    User user = new User.UserBuilder()
+        .addUsername("memo")
+        .addEmail("memo@example.com")
+        .addPassword(passwordHasher.hash("secret"))
+        .addRoles("ROLE_CONSUMER")
+        .build();
+    BantuiIdentityStore identityStore =
+        new BantuiIdentityStore(repositoryReturning(user), passwordHasher);
+
+    var result = identityStore.validate(
+        new UsernamePasswordCredential("memo@example.com", "secret"));
+
+    assertEquals(VALID, result.getStatus());
+    assertEquals("memo", result.getCallerPrincipal().getName());
+  }
+
+  @Test
+  void rejectsInvalidPasswordsAndLockedUsers() {
     User user = activeUser("memo", "secret", "ROLE_CONSUMER");
     BantuiIdentityStore identityStore = new BantuiIdentityStore(repositoryReturning(user), passwordHasher);
 
     assertEquals(INVALID,
         identityStore.validate(new UsernamePasswordCredential("memo", "wrong")).getStatus());
 
-    user.setEnabled(User.NO);
+    user.setAccountNonLocked(User.NO);
     assertEquals(INVALID,
         identityStore.validate(new UsernamePasswordCredential("memo", "secret")).getStatus());
   }
@@ -60,8 +78,10 @@ class BantuiIdentityStoreTest {
   private UserRepository repositoryReturning(User user) {
     return new UserRepository() {
       @Override
-      public Optional<User> findByUsername(String username) {
-        return user.getUsername().equals(username) ? Optional.of(user) : Optional.empty();
+      public Optional<User> findByUsernameOrEmail(String login) {
+        return user.getUsername().equals(login) || user.getEmail().equals(login)
+            ? Optional.of(user)
+            : Optional.empty();
       }
     };
   }

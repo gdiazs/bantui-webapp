@@ -197,16 +197,13 @@ public class User {
 
     private User newUser;
 
-    /**
-     * It creates an inactive user
-     */
     public UserBuilder() {
       this.newUser = new User();
       newUser.setId(UUID.randomUUID() + "");
       newUser.setAccountNonExpired(YES);
       newUser.setAccountNonLocked(YES);
       newUser.setCredentialsNonExpired(YES);
-      newUser.setEnabled(NO);
+      newUser.setEnabled(YES);
     }
 
     public UserBuilder addUsername(String username) {
