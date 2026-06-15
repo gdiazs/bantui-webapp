@@ -3,19 +3,19 @@ package com.gdiazs.bantui.users;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
-import org.springframework.security.core.GrantedAuthority;
 
 /**
  * @author gdiazs
  */
 @Entity
 @Table(name = "authorities")
-public class Authority implements GrantedAuthority {
+public class Authority {
 
   private static final long serialVersionUID = 1L;
 
@@ -48,7 +48,6 @@ public class Authority implements GrantedAuthority {
     this.id = id;
   }
 
-  @Override
   public String getAuthority() {
     return this.authority;
   }
@@ -88,8 +87,10 @@ public class Authority implements GrantedAuthority {
 
     for (int i = 0; i < roles.length; i++) {
       Authority auth = new Authority();
+      auth.setId(UUID.randomUUID().toString());
       auth.setAuthority(roles[i]);
       auth.setVersion(1);
+      auths.add(auth);
     }
 
     return auths;

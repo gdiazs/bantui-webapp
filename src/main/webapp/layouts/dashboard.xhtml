@@ -18,8 +18,6 @@
 
 		<b:navbarLinks pull="right">
 			<b:form styleClass="navbar-form navbar-left">
-				<input type="hidden" name="#{_csrf.parameterName}"
-					value="#{_csrf.token}" />
 				<b:dropButton value="Account " icon="cog">
 					<b:navLink value="Action" href="#"></b:navLink>
 					<b:navLink value="Another action" href="#"></b:navLink>
@@ -27,7 +25,7 @@
 					<b:navLink></b:navLink>
 					<b:navLink header="Nav header"></b:navLink>
 					<b:navLink value="Separated link" href="#"></b:navLink>
-					<b:navLink value="One more separated link" href="#"></b:navLink>
+					<b:commandButton value="Cerrar sesión" action="#{loginController.logout}" />
 				</b:dropButton>
 			</b:form>
 

@@ -7,7 +7,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import jakarta.transaction.Transactional;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.gdiazs.bantui.web.security.PasswordHasher;
 import com.gdiazs.bantui.users.ConfirmationToken;
 import com.gdiazs.bantui.users.ConfirmationTokenPK;
 import com.gdiazs.bantui.users.ConfirmationTokenRepository;
@@ -23,18 +23,18 @@ public class RegisterService {
 
   private final UserRepository userRepository;
 
-  private final BCryptPasswordEncoder passwordEncoder;
+  private final PasswordHasher passwordHasher;
 
   private final ConfirmationTokenRepository confirmationTokenRepository;
 
 
   @Inject
   public RegisterService(final UserRepository userRepository,
-      final BCryptPasswordEncoder passwordEncoder,
+      final PasswordHasher passwordHasher,
       final ConfirmationTokenRepository confirmationTokenRepository) throws RegisterUserException {
 
     this.userRepository = userRepository;
-    this.passwordEncoder = passwordEncoder;
+    this.passwordHasher = passwordHasher;
     this.confirmationTokenRepository = confirmationTokenRepository;
 
   }
@@ -51,7 +51,7 @@ public class RegisterService {
 
     if (foundUserByusername == null || foundUserByEmail == null) {
       final User user =
-          new UserBuilder().addUsername(username).addPassword(this.passwordEncoder.encode(password))
+          new UserBuilder().addUsername(username).addPassword(this.passwordHasher.hash(password))
               .addRoles("ROLE_CONSUMER").addEmail(email).build();
 
       this.userRepository.save(user);
@@ -91,7 +91,7 @@ public class RegisterService {
     final ConfirmationToken confirmationToken = new ConfirmationToken();
     confirmationToken.setId(pk);
     confirmationToken.setConfirmed(NOT_CONFIRMED);
-    confirmationToken.setToken(passwordEncoder.encode(uuid + foundAnyByUsername.getUsername()));
+    confirmationToken.setToken(passwordHasher.hash(uuid + foundAnyByUsername.getUsername()));
     confirmationToken.setCreatedAt(new Timestamp(now.getTime()));
     confirmationToken.setUpdatedAt(new Timestamp(now.getTime()));
     return this.confirmationTokenRepository.save(confirmationToken);

@@ -9,7 +9,10 @@
 	</welcome-file-list>
 
 	<security-role>
-		<role-name>ROLE_TOAST</role-name>
+		<role-name>ROLE_ADMIN</role-name>
+	</security-role>
+	<security-role>
+		<role-name>ROLE_CONSUMER</role-name>
 	</security-role>
 
 	<context-param>
@@ -33,13 +36,6 @@
 		<param-value>/*.xhtml</param-value>
 	</context-param>
 
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			/WEB-INF/spring-security.xml
-		</param-value>
-	</context-param>
-
 	<!-- Faces Servlet -->
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -53,23 +49,18 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
-	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
-	<welcome-file-list>
-		<welcome-file>feed/index.xhtml</welcome-file>
-	</welcome-file-list>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Authenticated pages</web-resource-name>
+			<url-pattern>/pages/dashboard.xhtml</url-pattern>
+			<url-pattern>/pages/feed.xhtml</url-pattern>
+			<url-pattern>/pages/feed/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ROLE_ADMIN</role-name>
+			<role-name>ROLE_CONSUMER</role-name>
+		</auth-constraint>
+	</security-constraint>
 	
 	<error-page>
 		<error-code>404</error-code>
@@ -79,6 +70,10 @@
 	<error-page>
 		<error-code>401</error-code>
 		<location>/pages/errors/401.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/pages/errors/403.xhtml</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>

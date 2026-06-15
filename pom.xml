@@ -14,7 +14,8 @@
 		<jakartaee.version>10.0.0</jakartaee.version>
 		<tomee.version>10.1.5</tomee.version>
 		<hibernate.version>6.6.53.Final</hibernate.version>
-		<spring-security.version>6.5.11</spring-security.version>
+		<bcrypt.version>0.10.2</bcrypt.version>
+		<junit.version>5.13.4</junit.version>
 		<database.driver>org.hsqldb.jdbc.JDBCDriver</database.driver>
 		<database.url>jdbc:hsqldb:file:${user.home}/.bantui/bantui;shutdown=true</database.url>
 		<database.username>sa</database.username>
@@ -47,14 +48,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${spring-security.version}</version>
+			<groupId>at.favre.lib</groupId>
+			<artifactId>bcrypt</artifactId>
+			<version>${bcrypt.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${spring-security.version}</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>

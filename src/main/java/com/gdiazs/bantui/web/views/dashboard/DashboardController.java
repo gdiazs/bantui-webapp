@@ -1,8 +1,8 @@
 package com.gdiazs.bantui.web.views.dashboard;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
-import com.gdiazs.bantui.web.security.Secured;
 
 @Named
 @RequestScoped
@@ -10,7 +10,7 @@ public class DashboardController {
 
   private String input;
 
-  @Secured({"ROLE_ADMIN"})
+  @RolesAllowed("ROLE_ADMIN")
   public void click()
   {
       System.out.println("Corre");

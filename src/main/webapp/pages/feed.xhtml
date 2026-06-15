@@ -18,13 +18,11 @@
 					<b:form id="secondSearch">
 						<b:inputText styleClass="searchBarInput2" look=""
 							placeholder="Buscar productos" />
-						<input type="hidden" name="#{_csrf.parameterName}"
-							value="#{_csrf.token}" />
 					</b:form>
 				</b:column>
 			</b:row>		
 				
-				#{request.getUserPrincipal().getPrincipal().isUserInRole('ROLE_CUSTOMER')}	
+				#{request.isUserInRole('ROLE_CONSUMER')}
 			</b:container>
 	</ui:define>
 </ui:composition>

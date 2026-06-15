@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -15,12 +16,10 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Version;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User {
 
   private static final long serialVersionUID = -8738458013930775017L;
 
@@ -40,7 +39,7 @@ public class User implements UserDetails {
   @Column(name = "user_password")
   private String password;
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
   @JoinTable(name = "users_authorities",
       joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id_user"),
       inverseJoinColumns = @JoinColumn(name = "authority_id",
@@ -71,37 +70,30 @@ public class User implements UserDetails {
   @Column(name = "user_version")
   private Integer version;
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
+  public Collection<Authority> getAuthorities() {
     return this.authorities;
   }
 
-  @Override
   public String getPassword() {
     return this.password;
   }
 
-  @Override
   public String getUsername() {
     return this.username;
   }
 
-  @Override
   public boolean isAccountNonExpired() {
     return this.accountNonExpired == YES;
   }
 
-  @Override
   public boolean isAccountNonLocked() {
     return this.accountNonLocked == YES;
   }
 
-  @Override
   public boolean isCredentialsNonExpired() {
     return this.credentialsNonExpired == YES;
   }
 
-  @Override
   public boolean isEnabled() {
     return this.enabled == YES;
   }

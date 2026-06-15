@@ -29,24 +29,20 @@
 
 							</b:row>
 							<b:messages />
-							<form action="#{root}/login" method="post">
+							<h:form id="loginForm">
 
 								<b:inputText placeholder="#{i18n['register.label.email']}"
-									value="#{registerFormModel.username}" field-id="username"
-									name="username" />
+									value="#{loginController.username}" required="true" />
 								<b:inputSecret placeholder="#{i18n['register.label.password']}"
-									value="#{registerFormModel.password}" field-id="password"
-									name="password" />
+									value="#{loginController.password}" required="true" />
 
-								<input type="submit" class="btn btn-primary btn-block"
-									value="#{i18n['register.label.login']}" />
+								<b:commandButton look="primary btn-block"
+									value="#{i18n['register.label.login']}"
+									action="#{loginController.login}" />
 
 								<b:link value="¿Eres nuevo? Crear cuenta"
 									styleClass="btn btn-default btn-block" href="#{root}/pages/register.xhtml"/>
 
-
-								<input type="hidden" name="#{_csrf.parameterName}"
-									value="#{_csrf.token}" />
 
 								<div style="display: none">
 
@@ -59,7 +55,7 @@
 									</button>
 
 								</div>
-							</form>
+							</h:form>
 
 						</b:panel>
 
