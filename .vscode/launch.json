@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug Bantui on TomEE",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005,
+            "preLaunchTask": "TomEE: debug",
+            "projectName": "bantui-webapp"
+        },
+        {
+            "type": "java",
+            "name": "Attach to running TomEE",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005,
+            "projectName": "bantui-webapp"
+        }
+    ]
+}

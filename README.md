@@ -17,3 +17,16 @@ mvn -Ppostgresql tomee:run
 Data access intentionally uses Jakarta Persistence 3.1 repositories. Jakarta Data 1.0
 belongs to Jakarta EE 11, so adopting it is deferred until the application moves beyond
 TomEE 10 and Jakarta EE 10.
+
+## Debugging in VS Code
+
+This project is a Jakarta EE WAR, so TomEE is its application entry point instead of a
+Java `main` method. Open **Run and Debug** in VS Code and select
+`Debug Bantui on TomEE`. The configured task builds the WAR, starts TomEE with JDWP on
+port `5005`, and attaches the Java debugger.
+
+You can also start the server manually and then use `Attach to running TomEE`:
+
+```bash
+mvn clean package tomee:debug -Dtomee-plugin.debugPort=5005
+```
