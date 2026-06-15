@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tomee>
-		<Resource id="bantuiDS" type="DataSource">
-		JdbcDriver org.hsqldb.jdbcDriver
-		JdbcUrl jdbc:hsqldb:file:~/.javaee8db
-		UserName sa
-		Password
+	<Resource id="bantuiDS" type="DataSource">
+		JdbcDriver ${bantui.database.driver}
+		JdbcUrl ${bantui.database.url}
+		UserName ${bantui.database.username}
+		Password ${bantui.database.password}
 	</Resource>
 
 		<Resource id="jndi/defaultMail" type="jakarta.mail.Session">

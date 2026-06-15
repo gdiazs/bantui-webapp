@@ -13,7 +13,13 @@
 		<java.version>25</java.version>
 		<jakartaee.version>10.0.0</jakartaee.version>
 		<tomee.version>10.1.5</tomee.version>
+		<hibernate.version>6.6.53.Final</hibernate.version>
 		<spring-security.version>6.5.11</spring-security.version>
+		<database.driver>org.hsqldb.jdbc.JDBCDriver</database.driver>
+		<database.url>jdbc:hsqldb:file:${user.home}/.bantui/bantui;shutdown=true</database.url>
+		<database.username>sa</database.username>
+		<database.password></database.password>
+		<hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -102,8 +108,21 @@
 					<context>ROOT</context>
 					<args>--enable-native-access=ALL-UNNAMED</args>
 					<libs>
+						<lib>remove:openjpa-</lib>
+						<lib>org.hibernate.orm:hibernate-core:${hibernate.version}</lib>
+						<lib>org.hibernate.common:hibernate-commons-annotations:7.0.3.Final</lib>
+						<lib>com.fasterxml:classmate:1.5.1</lib>
+						<lib>net.bytebuddy:byte-buddy:1.17.8</lib>
+						<lib>org.antlr:antlr4-runtime:4.13.2</lib>
 						<lib>org.postgresql:postgresql:42.7.11</lib>
 					</libs>
+					<systemVariables>
+						<bantui.database.driver>${database.driver}</bantui.database.driver>
+						<bantui.database.url>${database.url}</bantui.database.url>
+						<bantui.database.username>${database.username}</bantui.database.username>
+						<bantui.database.password>${database.password}</bantui.database.password>
+						<hibernate.hbm2ddl.auto>${hibernate.hbm2ddl.auto}</hibernate.hbm2ddl.auto>
+					</systemVariables>
 				</configuration>
 
 			</plugin>
@@ -111,6 +130,19 @@
 		</plugins>
 
 	</build>
+
+	<profiles>
+		<profile>
+			<id>postgresql</id>
+			<properties>
+				<database.driver>org.postgresql.Driver</database.driver>
+				<database.url>jdbc:postgresql://localhost:5432/bantui</database.url>
+				<database.username>bantui</database.username>
+				<database.password>bantui</database.password>
+				<hibernate.hbm2ddl.auto>validate</hibernate.hbm2ddl.auto>
+			</properties>
+		</profile>
+	</profiles>
 
 
 </project>
