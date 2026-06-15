@@ -10,6 +10,7 @@ import com.gdiazs.bantui.users.User;
 import com.gdiazs.bantui.users.UserRepository;
 import jakarta.security.enterprise.credential.UsernamePasswordCredential;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 class BantuiIdentityStoreTest {
@@ -59,8 +60,8 @@ class BantuiIdentityStoreTest {
   private UserRepository repositoryReturning(User user) {
     return new UserRepository() {
       @Override
-      public User findByUsername(String username) {
-        return user.getUsername().equals(username) ? user : null;
+      public Optional<User> findByUsername(String username) {
+        return user.getUsername().equals(username) ? Optional.of(user) : Optional.empty();
       }
     };
   }

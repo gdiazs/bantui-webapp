@@ -43,33 +43,18 @@ public class RegisterService {
   public RegisterStatus createNewUser(final String username, final String email,
       final String password) throws RegisterUserException {
 
-    final User foundUserByusername = this.userRepository.findAnyByUsername(username);
-    final User foundUserByEmail = this.userRepository.findAnyByEmail(email);
-
-
-    RegisterStatus registerStatus = RegisterStatus.USER_NOT_CREATED;
-
-    if (foundUserByusername == null || foundUserByEmail == null) {
-      final User user =
-          new UserBuilder().addUsername(username).addPassword(this.passwordHasher.hash(password))
-              .addRoles("ROLE_CONSUMER").addEmail(email).build();
-
-      this.userRepository.save(user);
-
-      registerStatus = RegisterStatus.USER_CREATED;
+    if (this.userRepository.findByUsername(username).isPresent()) {
+      return RegisterStatus.USERNAME_EXISTS;
+    }
+    if (this.userRepository.findByEmail(email).isPresent()) {
+      return RegisterStatus.EMAIL_TAKEN;
     }
 
-    if (foundUserByusername != null) {
-      registerStatus = RegisterStatus.USERNAME_EXISTS;
-
-    }
-
-    if (foundUserByEmail != null) {
-      registerStatus = RegisterStatus.EMAIL_TAKEN;
-
-    }
-
-    return registerStatus;
+    final User user =
+        new UserBuilder().addUsername(username).addPassword(this.passwordHasher.hash(password))
+            .addRoles("ROLE_CONSUMER").addEmail(email).build();
+    this.userRepository.save(user);
+    return RegisterStatus.USER_CREATED;
   }
 
 
@@ -77,21 +62,22 @@ public class RegisterService {
   @Transactional
   public ConfirmationToken createConfirmationToken(final String username) {
 
-    final User foundAnyByUsername = this.userRepository.findAnyByUsername(username);
+    final User foundUserByUsername = this.userRepository.findByUsername(username)
+        .orElseThrow(() -> new IllegalArgumentException("Unknown user: " + username));
 
 
     final String uuid = UUID.randomUUID() + "";
 
     final ConfirmationTokenPK pk = new ConfirmationTokenPK();
     pk.setIdConfimationToken(uuid);
-    pk.setIdUser(foundAnyByUsername.getId());
+    pk.setIdUser(foundUserByUsername.getId());
 
     Date now = new Date();
 
     final ConfirmationToken confirmationToken = new ConfirmationToken();
     confirmationToken.setId(pk);
     confirmationToken.setConfirmed(NOT_CONFIRMED);
-    confirmationToken.setToken(passwordHasher.hash(uuid + foundAnyByUsername.getUsername()));
+    confirmationToken.setToken(passwordHasher.hash(uuid + foundUserByUsername.getUsername()));
     confirmationToken.setCreatedAt(new Timestamp(now.getTime()));
     confirmationToken.setUpdatedAt(new Timestamp(now.getTime()));
     return this.confirmationTokenRepository.save(confirmationToken);

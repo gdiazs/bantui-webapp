@@ -33,7 +33,7 @@ public class BantuiIdentityStore implements IdentityStore {
       return INVALID_RESULT;
     }
 
-    User user = userRepository.findByUsername(usernamePassword.getCaller());
+    User user = userRepository.findByUsername(usernamePassword.getCaller()).orElse(null);
     if (user == null || !isActive(user)
         || !passwordHasher.verify(usernamePassword.getPassword().getValue(), user.getPassword())) {
       return INVALID_RESULT;

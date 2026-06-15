@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.1"
+    xmlns="https://jakarta.ee/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd">
+  <persistence-unit name="bantuiTestPu" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>com.gdiazs.bantui.users.User</class>
+    <class>com.gdiazs.bantui.users.Authority</class>
+    <class>com.gdiazs.bantui.users.ConfirmationToken</class>
+    <class>com.gdiazs.bantui.users.ConfirmationTokenPK</class>
+    <properties>
+      <property name="jakarta.persistence.jdbc.driver" value="org.hsqldb.jdbc.JDBCDriver" />
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:hsqldb:mem:bantui-repository-test" />
+      <property name="jakarta.persistence.jdbc.user" value="sa" />
+      <property name="jakarta.persistence.jdbc.password" value="" />
+      <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+    </properties>
+  </persistence-unit>
+</persistence>
